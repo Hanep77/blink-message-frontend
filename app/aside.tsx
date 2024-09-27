@@ -25,10 +25,82 @@ export default function Aside() {
       lastChat: "oke",
       time: "07:33"
     },
+    {
+      id: 1,
+      name: "Rusdi",
+      lastChat: "y",
+      time: "10:15"
+    },
+    {
+      id: 2,
+      name: "si imut",
+      lastChat: "halo",
+      time: "09:01"
+    },
+    {
+      id: 3,
+      name: "Fuad",
+      lastChat: "oke",
+      time: "07:33"
+    },
+    {
+      id: 1,
+      name: "Rusdi",
+      lastChat: "y",
+      time: "10:15"
+    },
+    {
+      id: 2,
+      name: "si imut",
+      lastChat: "halo",
+      time: "09:01"
+    },
+    {
+      id: 3,
+      name: "Fuad",
+      lastChat: "oke",
+      time: "07:33"
+    },
+    {
+      id: 1,
+      name: "Rusdi",
+      lastChat: "y",
+      time: "10:15"
+    },
+    {
+      id: 2,
+      name: "si imut",
+      lastChat: "halo",
+      time: "09:01"
+    },
+    {
+      id: 3,
+      name: "Fuad",
+      lastChat: "oke",
+      time: "07:33"
+    },
+    {
+      id: 1,
+      name: "Rusdi",
+      lastChat: "y",
+      time: "10:15"
+    },
+    {
+      id: 2,
+      name: "si imut",
+      lastChat: "halo",
+      time: "09:01"
+    },
+    {
+      id: 3,
+      name: "Fuad",
+      lastChat: "oke",
+      time: "07:33"
+    },
   ]
 
   return (
-    <aside className="w-4/12 h-screen border-e border-zinc-700 overflow-scroll p-4">
+    <aside className="w-4/12 h-screen border-e border-zinc-700 overflow-y-auto p-4">
       <h1 className="text-2xl font-semibold mb-4">Chats</h1>
       <div className="flex flex-col gap-2">
         {data.map(item => (
