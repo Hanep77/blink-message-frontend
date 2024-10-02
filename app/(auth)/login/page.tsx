@@ -1,13 +1,57 @@
+"use client"
+
+import { FormEvent, useState } from "react"
+
 export default function Login() {
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
+
+  async function submit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+
+    const body = {
+      email: e.currentTarget.email.value,
+      password: e.currentTarget.password.value
+    }
+
+    try {
+      let response = await fetch('http://localhost:8000/api/v1/auth/login', {
+        method: "POST",
+        body: JSON.stringify(body),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message);
+      }
+
+      let data = await response.json()
+      if (data.statusCode == 200) {
+        window.location.href = "/"
+      }
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setErrorMessage(error.message)
+      }
+    }
+  }
+
   return (
-    <form>
+    <form onSubmit={submit}>
       <h2 className="text-xl font-medium text-center mb-3">Login</h2>
+      {errorMessage && (
+        <div className="mb-3 h-8 bg-red-300 bg-opacity-80 text-red-800 flex justify-center items-center rounded">
+          <p>{errorMessage}</p>
+        </div>
+      )}
       <div className="mb-3">
         <label htmlFor="email">Email</label>
         <input type="email"
           name="email"
           placeholder="email@example.com"
-          id="password"
+          id="email"
           className="border border-zinc-600 focus:border-zinc-300 bg-zinc-700 w-full rounded h-8 px-2 outline-none" />
       </div>
       <div className="mb-3">
