@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from "react"
 import Link from "next/link"
+import { redirect } from "next/navigation"
 
 export default function Register() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
@@ -32,12 +33,13 @@ export default function Register() {
       const data = await response.json()
 
       if (data.statusCode == 201) {
-        window.location.href = "/login"
+        redirect('/login');
       }
 
     } catch (error: unknown) {
       if (error instanceof Error) {
         setErrorMessage(error.message)
+        console.log(error.message);
       }
     }
   }

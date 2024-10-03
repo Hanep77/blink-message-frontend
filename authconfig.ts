@@ -1,4 +1,6 @@
 export type { NextAuthConfig } from 'next-auth';
+import { isTokenAssigned } from './manageToken';
+
 
 export const authConfig = {
     pages: {
@@ -6,12 +8,11 @@ export const authConfig = {
     },
     callbacks: {
         authorized({ auth, request: { nextUrl } }) {
-            const isLoggedIn = !!auth?.user;
             const isAuthorized = nextUrl.pathname.startsWith('/chat');
             if (isAuthorized) {
-                if (isLoggedIn) return true;
+                if (isTokenAssigned.authToken) return true;
                 return false;
-            } else if (isLoggedIn) {
+            } else if (isTokenAssigned.authToken) {
                 return Response.redirect(new URL('/chat', nextUrl));
             }
             return true;
