@@ -1,17 +1,45 @@
-"use client";
+"use client"
 
-import { authenticate } from "./actions";
-import { useFormState } from "react-dom";
+import { FormEvent, useState } from "react"
 
 export default function Login() {
-  const [errorMessage, formAction, isPending] = useFormState(
-    authenticate,
-    undefined,
-  );
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
+  async function submit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+
+    const body = {
+      email: e.currentTarget.email.value,
+      password: e.currentTarget.password.value
+    }
+
+    try {
+      let response = await fetch('http://localhost:8000/api/v1/auth/login', {
+        method: "POST",
+        body: JSON.stringify(body),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message);
+      }
+
+      let data = await response.json()
+      if (data.statusCode == 200) {
+        window.location.href = "/"
+      }
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setErrorMessage(error.message)
+      }
+    }
+  }
 
   return (
-    <form action={formAction}>
+    <form onSubmit={submit}>
       <h2 className="text-xl font-medium text-center mb-3">Login</h2>
       {errorMessage && (
         <div className="mb-3 h-8 bg-red-300 bg-opacity-80 text-red-800 flex justify-center items-center rounded">
@@ -35,7 +63,7 @@ export default function Login() {
           className="border border-zinc-600 focus:border-zinc-300 bg-zinc-700 w-full rounded h-8 px-2 outline-none" />
       </div>
       <div className="mb-3">
-        <button aria-disabled={isPending} className="w-full h-8 bg-green-600 hover:bg-green-700 active:bg-green-800 rounded">Login</button>
+        <button type="submit" className="w-full h-8 bg-green-600 hover:bg-green-700 active:bg-green-800 rounded">Login</button>
       </div>
       <p>Do not have account yet? <a href="/register" className="text-blue-400">register</a></p>
     </form>
