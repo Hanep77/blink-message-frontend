@@ -1,6 +1,7 @@
 "use client"
 
 import { FormEvent, useState } from "react"
+import Link from "next/link"
 
 export default function Register() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
@@ -76,7 +77,7 @@ export default function Register() {
       <div className="mb-3">
         <button type="submit" className="w-full h-8 bg-green-600 hover:bg-green-700 active:bg-green-800 rounded">Register</button>
       </div>
-      <p>Aleady have account? <a href="/login" className="text-blue-400">login</a></p>
+      <p>Aleady have account? <Link href="/login" className="text-blue-400">login</Link></p>
     </form>
   )
 }

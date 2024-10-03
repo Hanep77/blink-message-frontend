@@ -7,12 +7,12 @@ export const authConfig = {
     callbacks: {
         authorized({ auth, request: { nextUrl } }) {
             const isLoggedIn = !!auth?.user;
-            const isAuthorized = nextUrl.pathname.startsWith('/');
+            const isAuthorized = nextUrl.pathname.startsWith('/chat');
             if (isAuthorized) {
                 if (isLoggedIn) return true;
                 return false;
             } else if (isLoggedIn) {
-                return Response.redirect(new URL('/', nextUrl));
+                return Response.redirect(new URL('/chat', nextUrl));
             }
             return true;
         },

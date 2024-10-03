@@ -1,5 +1,6 @@
 import NextAuth from 'next-auth';
 import { authConfig } from './authconfig';
+import { NextRequest, NextResponse } from 'next/server';
 
 export default NextAuth(authConfig).auth;
 

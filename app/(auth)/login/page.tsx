@@ -1,9 +1,12 @@
 "use client"
 
 import { FormEvent, useState } from "react"
+import Link from "next/link"
+import { useRouter } from "next/router"
 
 export default function Login() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
+  const router = useRouter();
 
   async function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -29,7 +32,7 @@ export default function Login() {
 
       let data = await response.json()
       if (data.statusCode == 200) {
-        window.location.href = "/"
+        router.push("/chat");
       }
     } catch (error: unknown) {
       if (error instanceof Error) {
@@ -65,7 +68,8 @@ export default function Login() {
       <div className="mb-3">
         <button type="submit" className="w-full h-8 bg-green-600 hover:bg-green-700 active:bg-green-800 rounded">Login</button>
       </div>
-      <p>Do not have account yet? <a href="/register" className="text-blue-400">register</a></p>
+      {/* <p>Do not have account yet? <a href="/register" className="text-blue-400">register</a></p> */}
+      <p>Do not have account yet? <Link href="/register" className="text-blue-400">register</Link></p>
     </form>
   )
 }
