@@ -21,7 +21,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en">
       <body className={`bg-zinc-800 text-zinc-300 flex`}>
         {!disabledAside.includes(pathname) && <Aside />}
-
         <main>
           {children}
         </main>

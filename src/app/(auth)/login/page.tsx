@@ -1,8 +1,8 @@
 "use client";
 
+import { authenticate } from "@/src/auth";
 import Link from "next/link"
 import { useFormState } from "react-dom";
-import { authenticate } from "@/auth";
 
 export default function Login() {
   const [errorMessage, formAction, isPending] = useFormState(
