@@ -51,6 +51,42 @@ export default function Aside() {
       lastChat: "oke",
       time: "07:33"
     },
+    {
+      id: 3,
+      name: "Fuad",
+      lastChat: "oke",
+      time: "07:33"
+    },
+    {
+      id: 3,
+      name: "Fuad",
+      lastChat: "oke",
+      time: "07:33"
+    },
+    {
+      id: 3,
+      name: "Fuad",
+      lastChat: "oke",
+      time: "07:33"
+    },
+    {
+      id: 3,
+      name: "Fuad",
+      lastChat: "oke",
+      time: "07:33"
+    },
+    {
+      id: 3,
+      name: "Fuad",
+      lastChat: "oke",
+      time: "07:33"
+    },
+    {
+      id: 3,
+      name: "Fuad",
+      lastChat: "oke",
+      time: "07:33"
+    },
   ]
 
   const pathname = usePathname();
@@ -58,10 +94,10 @@ export default function Aside() {
   return (
     <aside className="w-[400px] overflow-hidden border-e border-zinc-700">
       <div className="flex flex-row h-[100vh]">
-        <div className="w-[70px] bg-gray-700 rounded">
+        <div className="w-[70px] bg-zinc-800 border-e border-zinc-700 rounded">
           <div className="flex flex-col h-full relative p-2">
-            <Link href={'/'} className={clsx("flex p-2 rounded-lg",{'bg-gray-500' : pathname === '/'})}>
-              <ChatIcon className="m-auto text-3xl"/>
+            <Link href={'/'} className={clsx("flex p-2 rounded-lg", { 'bg-gray-500': pathname === '/' })}>
+              <ChatIcon className="m-auto text-3xl" />
             </Link>
             <div className="absolute bottom-3 p-2 left-0">
               <Image src='/profileImage/test.jpg' width={200} height={200} alt="Client Profile Image" className="rounded-full" />
@@ -70,7 +106,7 @@ export default function Aside() {
         </div>
 
         <div className="flex flex-col w-full">
-          <h1 className="text-2xl font-semibold mb-2 ms-2 italic underline">Blink Message</h1>
+          <h1 className="text-2xl font-semibold my-2 ms-2 italic underline">Blink Message</h1>
           <div className="overflow-auto">
             {data.map((item, key) => (
               <Link href={"/chat"} className="flex items-center justify-between border-b border-zinc-700 hover:bg-zinc-700 px-2" key={key}>
