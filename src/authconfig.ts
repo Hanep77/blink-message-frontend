@@ -1,21 +1,21 @@
-export type { NextAuthConfig } from 'next-auth';
-import { isTokenAssigned } from './manageToken';
-
+import type { NextAuthConfig } from "next-auth";
+import { isTokenAssigned } from "./manageToken";
 
 export const authConfig = {
   pages: {
-    signIn: '/login',
+    signIn: "/login",
+    newUser: "/signup",
   },
   callbacks: {
-    authorized({ auth, request: { nextUrl } }) {
-      const isAuthorized = nextUrl.pathname.startsWith('/chat');
+    authorized({ auth, request: { nextUrl } }: any) {
+      const isLoggedIn = !!auth?.user;
+      const isAuthorized = nextUrl.pathname.startsWith("/chat");
       if (isAuthorized) {
-        if (isTokenAssigned.authToken) return true;
+        if (isLoggedIn) return true;
         return false;
-      } else if (isTokenAssigned.authToken) {
-        return Response.redirect(new URL('/chat', nextUrl));
+      } else if (isLoggedIn) {
+        return Response.redirect(new URL("/chat", nextUrl));
       }
-      return true;
     },
   },
   providers: [],

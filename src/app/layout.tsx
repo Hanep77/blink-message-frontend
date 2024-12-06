@@ -6,7 +6,7 @@ import { usePathname, redirect } from "next/navigation";
 import { useEffect } from "react";
 
 
-const disabledAside = ["/login", "/register"]
+// const disabledAside = ["/login", "/register"]
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const pathname = usePathname()
@@ -20,7 +20,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en">
       <body className={`bg-zinc-800 text-zinc-300 flex`}>
-        {!disabledAside.includes(pathname) && <Aside />}
+        {/* {!disabledAside.includes(pathname) && <Aside />} */}
+        <Aside />
         <main className="flex-grow">
           {children}
         </main>
