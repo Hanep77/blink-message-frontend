@@ -1,8 +1,13 @@
 "use client"
 
 import { FormEvent, useState } from "react"
+import { useContext } from "react"
+import { useRouter } from "next/navigation"
+import AuthContext from "@/context/AuthContext"
 
 export default function Login() {
+  const router = useRouter();
+  const {saveValue} = useContext(AuthContext);
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   async function submit(e: FormEvent<HTMLFormElement>) {
@@ -29,10 +34,8 @@ export default function Login() {
 
       let data = await response.json()
       if (data.statusCode == 200) {
-        if (typeof window !== "undefined") {
-          window.localStorage.setItem("AuthToken", data.credentials)
-          window.location.href = "/"
-        }
+        saveValue(data.credentials);
+        router.push('/chat')
       }
     } catch (error: unknown) {
       if (error instanceof Error) {
