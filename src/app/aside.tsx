@@ -5,7 +5,6 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import ChatIcon from "@mui/icons-material/Chat";
 import clsx from "clsx";
-import SignOutComponent from "./(auth)/login/signOut";
 
 export default function Aside() {
   type ChatSession = {
@@ -105,7 +104,6 @@ export default function Aside() {
             >
               <ChatIcon className="m-auto text-3xl" />
             </Link>
-            <SignOutComponent />
             <div className="absolute bottom-3 p-2 left-0">
               <Image
                 src="/profileImage/test.jpg"

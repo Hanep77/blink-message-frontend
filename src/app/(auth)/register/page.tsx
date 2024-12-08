@@ -1,8 +1,6 @@
 "use client"
 
 import { FormEvent, useState } from "react"
-import Link from "next/link"
-import { redirect } from "next/navigation"
 
 export default function Register() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
@@ -33,13 +31,12 @@ export default function Register() {
       const data = await response.json()
 
       if (data.statusCode == 201) {
-        redirect('/login');
+        window.location.href = "/login"
       }
 
     } catch (error: unknown) {
       if (error instanceof Error) {
         setErrorMessage(error.message)
-        console.log(error.message);
       }
     }
   }
@@ -79,7 +76,7 @@ export default function Register() {
       <div className="mb-3">
         <button type="submit" className="w-full h-8 bg-green-600 hover:bg-green-700 active:bg-green-800 rounded">Register</button>
       </div>
-      <p>Aleady have account? <Link href="/login" className="text-blue-400">login</Link></p>
+      <p>Aleady have account? <a href="/login" className="text-blue-400">login</a></p>
     </form>
   )
 }

@@ -82,8 +82,8 @@ export default function Page() {
       </div>
 
       <div className="px-4 py-20">
-        {data.messages.map(message => (
-          <div key={message.id} className={`flex ${message.sender == "me" && "justify-end"} mb-1`}>
+        {data.messages.map((message, index) => (
+          <div key={index} className={`flex ${message.sender == "me" && "justify-end"} mb-1`}>
             <div className={`bg-zinc-700 py-2 px-4 ${message.sender == "me" ? "rounded-l-3xl rounded-tr-3xl" : "rounded-r-3xl rounded-tl-3xl"} max-w-96 text-wrap`}>
               {message.text}
             </div>
