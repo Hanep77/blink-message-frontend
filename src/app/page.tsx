@@ -1,8 +1,18 @@
+"use client"
+
+import { useEffect } from "react";
 
 export default function Home() {
-  return (
-    <div>
-      blink-message
-    </div>
-  );
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const token = window.localStorage.getItem("AuthToken");
+      if (token) {
+        window.location.href = "/chat"
+      } else {
+        window.location.href = "/login"
+      }
+    }
+  });
+  return (<></>);
 }
+
