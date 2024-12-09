@@ -4,9 +4,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import ChatIcon from "@mui/icons-material/Chat";
+import { useState } from "react";
 import clsx from "clsx";
+import {useContext} from "react";
+import AuthContext from "@/context/AuthContext";
 
 export default function Aside() {
+  const {clearValue} = useContext(AuthContext);
   type ChatSession = {
     id: number;
     name: string;
@@ -89,10 +93,12 @@ export default function Aside() {
     },
   ];
 
+  const [profileOpen, setProfileOpen] = useState(false);
+
   const pathname = usePathname();
 
   return (
-    <aside className="w-[400px] overflow-hidden border-e border-zinc-700">
+    <aside className="w-[400px] overflow-hidden border-e border-zinc-700 relative">
       <div className="flex flex-row h-[100vh]">
         <div className="w-[70px] bg-zinc-800 border-e border-zinc-700 rounded">
           <div className="flex flex-col h-full relative p-2">
@@ -104,7 +110,12 @@ export default function Aside() {
             >
               <ChatIcon className="m-auto text-3xl" />
             </Link>
-            <div className="absolute bottom-3 p-2 left-0">
+            <div className={`absolute left-12 bottom-16 bg-zinc-500 drop-shadow-lg rounded-lg h-auto w-48 p-2 ${profileOpen ? 'block' : 'hidden'}`}>
+              <button className="border-2 border-red-600 w-full text-red-600 font-semibold  rounded-lg p-2 hover:bg-red-600 hover:text-white transition-all" onClick={() => {clearValue()}}>
+                Logout
+              </button>
+            </div>
+            <div className="absolute bottom-3 p-2 left-0" onClick={() => {setProfileOpen(!profileOpen)}}>
               <Image
                 src="/profileImage/test.jpg"
                 width={200}

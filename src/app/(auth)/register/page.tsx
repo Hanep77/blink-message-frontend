@@ -1,8 +1,10 @@
 "use client"
 
 import { FormEvent, useState } from "react"
+import { useRouter } from "next/navigation"
 
 export default function Register() {
+  const router = useRouter();
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   async function submit(e: FormEvent<HTMLFormElement>) {
@@ -31,7 +33,7 @@ export default function Register() {
       const data = await response.json()
 
       if (data.statusCode == 201) {
-        window.location.href = "/login"
+        router.push('/login')
       }
 
     } catch (error: unknown) {
