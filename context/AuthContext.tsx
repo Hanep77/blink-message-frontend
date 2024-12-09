@@ -10,29 +10,33 @@ export const AuthProvider = ({ children }: Readonly<{ children: React.ReactNode 
   const router = useRouter();
   const pathName = usePathname();
   const [token, setToken] = useState<string | null>(localStorage.getItem("AuthToken"));
+  const [user, setUser] = useState<string|null>(localStorage.getItem("UserEmail"));
 
-  // useEffect(() => {
-    if(token){
-      if(pathName == '/login'){
-        router.push('chat');
-      }
-    }else{
-      router.push('/login');
+  if(token){
+    if(pathName == '/login'){
+      router.push('chat');
     }
-  // }, []);
+  }else{
+    router.push('/login');
+  }
 
-  const saveValue = (newValue: string) => {
+
+  const saveValue = (newValue: string, userData: string) => {
     setToken(newValue);
+    setUser(userData);
     localStorage.setItem("AuthToken", newValue);
+    localStorage.setItem("UserEmail", userData);
   };
 
   const clearValue = () => {
     setToken(null);
+    setUser(null);
     localStorage.removeItem("AuthToken");
+    localStorage.removeItem("UserEmail")
   };
 
   return (
-    <AuthContext.Provider value={{ token, saveValue, clearValue }}>
+    <AuthContext.Provider value={{ token, saveValue, clearValue, user }}>
       {children}
     </AuthContext.Provider>
   );
