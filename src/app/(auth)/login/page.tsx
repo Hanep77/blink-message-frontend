@@ -34,7 +34,7 @@ export default function Login() {
 
       let data = await response.json()
       if (data.statusCode == 200) {
-        saveValue(data.credentials);
+        saveValue(data.credentials, body.email);
         router.push('/chat')
       }
     } catch (error: unknown) {
