@@ -1,13 +1,19 @@
 "use client"
 
 import Aside from "../aside";
+import { useState } from "react";
+import NoChatComponent from "./noChat";
+import ChatPage from "./page";
+// export default function AuthLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default function AuthLayout() {
 
-export default function AuthLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const [chatSession, setChatSesssion] = useState<string|null>(null);
+
   return (
     <div className="flex">
-      <Aside />
+      <Aside setChatSession={setChatSesssion}/>
       <div className="flex-grow">
-        {children}
+        {chatSession ? (<ChatPage chatSession={chatSession}/>) : (<NoChatComponent />) }
       </div>
     </div>
   )

@@ -1,3 +1,8 @@
+"use client"
+
+import { useState } from "react"
+
+
 const data = {
   name: "Rusdi",
   messages: [
@@ -69,7 +74,12 @@ const data = {
   ]
 }
 
-export default function Page() {
+type ChatSession = {
+  chatSession: string|null
+}
+
+export default function ChatPage({chatSession}: ChatSession) {
+
   return (
     <div className="h-screen overflow-scroll">
       <div className="h-16 fixed w-[calc(100vw-400px)] border-b border-zinc-700 bg-zinc-800 flex items-center px-4 gap-4">
